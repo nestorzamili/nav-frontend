@@ -1,6 +1,7 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
+import MainLayout from "../components/Layout/MainLayout";
 import Login from "../features/auth/Login";
 import Dashboard from "../features/dashboard/Dashboard";
 import { NotFound } from "../components/NotFound/NotFound";
@@ -14,9 +15,17 @@ const AppRouter = () => {
           <Route path="/login" element={<Login />} />
         </Route>
 
-        {/* Private Routes */}
+        {/* Private Routes - Wrapped with MainLayout */}
         <Route element={<PrivateRoute />}>
-          <Route path="/" element={<Dashboard />} />
+          <Route
+            element={
+              <MainLayout>
+                <Outlet />
+              </MainLayout>
+            }
+          >
+            <Route path="/" element={<Dashboard />} />
+          </Route>
         </Route>
 
         {/* 404 Not Found */}

@@ -4,7 +4,13 @@ import AppRouter from "./routes/AppRouter";
 
 function App() {
   return (
-    <MantineProvider>
+    <MantineProvider
+      defaultColorScheme="light"
+      theme={{
+        primaryColor: "blue",
+        defaultRadius: "sm",
+      }}
+    >
       <AppRouter />
     </MantineProvider>
   );
